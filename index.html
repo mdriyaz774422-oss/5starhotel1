@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Star Elite Hotel Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #003366;     /* Deep dark blue */
+            --secondary-blue: #00509e;   /* Medium blue */
+            --light-blue: #e6f0ff;       /* Very light blue */
+            --white: #ffffff;
+            --off-white: #f8f9fa;
+            --gray: #f5f7fa;
+            --accent: #0099cc;           /* Bright cyan accent */
+            --accent-light: #66ccff;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --shadow: rgba(0, 51, 102, 0.1);
+        }
+        
+        * { 
+            margin:0; 
+            padding:0; 
+            box-sizing:border-box; 
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--off-white);
+            color: #333;
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 80, 158, 0.85)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+            height: 55vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            padding: 2rem;
+        }
+        
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+        
+        /* Navigation */
+        nav {
+            background: var(--primary-blue);
+            padding: 0.8rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        nav a:hover { 
+            background: rgba(255, 255, 255, 0.15); 
+            transform: translateY(-2px);
+        }
+        
+        .nav-active { 
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .user-info {
+            color: white;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        /* Main Container */
+        .container { 
+            max-width: 1400px; 
+            margin: 2rem auto; 
+            padding: 0 1.5rem; 
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 20px var(--shadow);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .active { 
+            display: block; 
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--light-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 5px solid var(--accent);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-card h3 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Forms */
+        form { 
+            display: grid; 
+            gap: 1.2rem; 
+            max-width: 700px; 
+            margin: 0 auto; 
+            padding: 1.5rem;
+            background: var(--off-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        input, select, textarea, button {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 153, 204, 0.2);
+        }
+        
+        button {
+            background: var(--primary-blue);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        button:hover { 
+            background: var(--secondary-blue); 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn-secondary {
+            background: var(--accent);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+        }
+        
+        .btn-success {
+            background: var(--success);
+        }
+        
+        /* Tables */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 1.5rem 0; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td { 
+            padding: 1rem; 
+            text-align: left; 
+            border-bottom: 1px solid #e0e0e0; 
+        }
+        
+        th { 
+            background: var(--primary-blue); 
+            color: white; 
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: var(--light-blue);
+        }
+        
+        .status-available { 
+            color: var(--success); 
+            font-weight: bold; 
+            background: rgba(40, 167, 69, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .status-booked { 
+            color: var(--danger); 
+            font-weight: bold; 
+            background: rgba(220, 53, 69, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .status-maintenance { 
+            color: var(--warning); 
+            font-weight: bold; 
+            background: rgba(255, 193, 7, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        /* Images */
+        .hero-img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Dashboard Info */
+        #current-date { 
+            text-align: center; 
+            font-size: 1.3rem; 
+            color: var(--primary-blue); 
+            margin: 1rem 0; 
+            font-weight: 500; 
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        
+        h2 { 
+            color: var(--primary-blue); 
+            margin-bottom: 1rem; 
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        h3 {
+            color: var(--secondary-blue);
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        /* Amenities Icons */
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .amenity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--light-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .amenity i {
+            color: var(--accent);
+        }
+        
+        /* Parking Section */
+        .parking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .parking-slot {
+            background: white;
+            border-radius: 8px;
+            padding: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--success);
+        }
+        
+        .parking-slot.occupied {
+            border-left-color: var(--danger);
+            background: #fff5f5;
+        }
+        
+        .parking-slot.reserved {
+            border-left-color: var(--warning);
+            background: #fff9e6;
+        }
+        
+        /* Room Details */
+        .room-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .room-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .room-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .room-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .room-info {
+            padding: 1.5rem;
+        }
+        
+        /* Login Section */
+        #login-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        }
+        
+        .login-box {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .login-logo {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .notification.success {
+            background: var(--success);
+        }
+        
+        .notification.error {
+            background: var(--danger);
+        }
+        
+        .notification.info {
+            background: var(--accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            header h1 { font-size: 3.5rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .stats-container { flex-direction: column; }
+        }
+        
+        @media (max-width: 768px) { 
+            header h1 { font-size: 2.8rem; }
+            nav { flex-direction: column; gap: 1rem; padding: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .user-info { margin-top: 0.5rem; }
+            .section { padding: 1.5rem; }
+            .room-details { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 576px) {
+            header { height: 45vh; }
+            header h1 { font-size: 2.2rem; }
+            header p { font-size: 1rem; }
+            .login-box { padding: 2rem; margin: 1rem; }
+        }
+        
+        /* Print Styles */
+        @media print {
+            nav, #login-section, button { display: none !important; }
+            .section { display: block !important; box-shadow: none; }
+        }
+        
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--accent);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+        
+        /* Dark Mode */
+        body.dark-mode {
+            background: #121212;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .section,
+        body.dark-mode .stat-card,
+        body.dark-mode .room-card,
+        body.dark-mode .parking-slot,
+        body.dark-mode #current-date {
+            background: #1e1e1e;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .card {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode form {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode th {
+            background: #003366;
+        }
+        
+        body.dark-mode tr:hover {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode input,
+        body.dark-mode select,
+        body.dark-mode textarea {
+            background: #2a2a2a;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1><i class="fas fa-crown"></i> 5 Star Elite Hotel</h1>
+        <p>Experience unparalleled luxury with world-class amenities, impeccable service, and breathtaking elegance since 2015</p>
+    </div>
+</header>
+
+<nav id="nav" style="display:none;">
+    <div class="nav-links">
+        <a href="#" onclick="showSection('dashboard')" class="nav-active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="#" onclick="showSection('rooms')"><i class="fas fa-bed"></i> Room Management</a>
+        <a href="#" onclick="showSection('bookings')"><i class="fas fa-calendar-check"></i> Bookings</a>
+        <a href="#" onclick="showSection('guests')"><i class="fas fa-users"></i> Guest Records</a>
+        <a href="#" onclick="showSection('parking')"><i class="fas fa-parking"></i> Parking</a>
+        <a href="#" onclick="showSection('facilities')"><i class="fas fa-swimming-pool"></i> Facilities</a>
+        <a href="#" onclick="showSection('about')"><i class="fas fa-info-circle"></i> About Hotel</a>
+    </div>
+    <div class="user-info">
+        <span><i class="fas fa-user"></i> Admin</span>
+        <label class="toggle-switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider"></span>
+        </label>
+        <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+</nav>
+
+<div class="container" id="main-content" style="display:none;">
+    <div id="current-date">Loading current date...</div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="section active">
+        <h2><i class="fas fa-tachometer-alt"></i> Hotel Overview Dashboard</h2>
+        <img src="https://images.unsplash.com/photo-1564501049418-3c27787d01e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" class="hero-img" alt="Elegant Hotel Lobby">
+        
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3 id="total-rooms">0</h3>
+                <p>Total Rooms</p>
+                <i class="fas fa-bed fa-2x" style="color: var(--primary-blue); margin-top: 10px;"></i>
+            </div>
+            <div class="stat-card">
+                <h3 id="available-rooms" class="status-available">0</h3>
+                <p>Available Rooms</p>
+                <i class="fas fa-door-open fa-2x" style="color: var(--success); margin-top: 10px;"></i>
+            </div>
+            <div class="stat-card">
+                <h3 id="booked-rooms" class="status-booked">0</h3>
+                <p>Occupied Rooms</p>
+                <i class="fas fa-key fa-2x" style="color: var(--danger); margin-top: 10px;"></i>
+            </div>
+            <div class="stat-card">
+                <h3 id="total-guests">0</h3>
+                <p>Total Guests</p>
+                <i class="fas fa-users fa-2x" style="color: var(--accent); margin-top: 10px;"></i>
+            </div>
+            <div class="stat-card">
+                <h3 id="today-checkin">0</h3>
+                <p>Today's Check-ins</p>
+                <i class="fas fa-calendar-day fa-2x" style="color: var(--warning); margin-top: 10px;"></i>
+            </div>
+            <div class="stat-card">
+                <h3 id="available-parking">0</h3>
+                <p>Available Parking</p>
+                <i class="fas fa-parking fa-2x" style="color: var(--secondary-blue); margin-top: 10px;"></i>
+            </div>
+        </div>
+        
+        <h3>Recent Bookings</h3>
+        <table id="recent-bookings">
+            <thead><tr><th>Booking ID</th><th>Guest Name</th><th>Room</th><th>Check-in</th><th>Check-out</th><th>Status</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Rooms -->
+    <div id="rooms" class="section">
+        <h2><i class="fas fa-bed"></i> Room & Suite Management</h2>
+        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" class="hero-img" alt="Luxury Hotel Room">
+        
+        <form id="add-room-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="room-number">Room/Suite Number *</label>
+                    <input type="text" id="room-number" placeholder="e.g. 501, Presidential-01" required>
+                </div>
+                <div class="form-group">
+                    <label for="room-type">Room Type *</label>
+                    <select id="room-type" required>
+                        <option value="Deluxe Ocean View">Deluxe Ocean View</option>
+                        <option value="Executive Suite">Executive Suite</option>
+                        <option value="Junior Suite">Junior Suite</option>
+                        <option value="Presidential Suite">Presidential Suite</option>
+                        <option value="Royal Penthouse">Royal Penthouse</option>
+                        <option value="Family Suite">Family Suite</option>
+                        <option value="Business Room">Business Room</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="room-price">Price per Night (₹) *</label>
+                    <input type="number" id="room-price" placeholder="e.g. 15000" min="5000" required>
+                </div>
+                <div class="form-group">
+                    <label for="room-floor">Floor *</label>
+                    <select id="room-floor" required>
+                        <option value="Ground">Ground Floor</option>
+                        <option value="1">1st Floor</option>
+                        <option value="2">2nd Floor</option>
+                        <option value="3">3rd Floor</option>
+                        <option value="4">4th Floor</option>
+                        <option value="5">5th Floor</option>
+                        <option value="Penthouse">Penthouse</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Amenities *</label>
+                <div class="amenities">
+                    <div class="amenity">
+                        <input type="checkbox" id="wifi" value="WiFi" checked>
+                        <label for="wifi"><i class="fas fa-wifi"></i> WiFi</label>
+                    </div>
+                    <div class="amenity">
+                        <input type="checkbox" id="hot-water" value="Hot Water" checked>
+                        <label for="hot-water"><i class="fas fa-shower"></i> Hot Water</label>
+                    </div>
+                    <div class="amenity">
+                        <input type="checkbox" id="ac" value="Air Conditioning" checked>
+                        <label for="ac"><i class="fas fa-wind"></i> AC</label>
+                    </div>
+                    <div class="amenity">
+                        <input type="checkbox" id="double-bed" value="Double Bed">
+                        <label for="double-bed"><i class="fas fa-bed"></i> Double Bed</label>
+                    </div>
+                    <div class="amenity">
+                        <input type="checkbox" id="single-bed" value="Single Bed">
+                        <label for="single-bed"><i class="fas fa-bed"></i> Single Bed</label>
+                    </div>
+                    <div class="amenity">
+                        <input type="checkbox" id="tv" value="TV" checked>
+                        <label for="tv"><i class="fas fa-tv"></i> TV</label>
+                    </div>
+                    <div class="amenity">
+                        <input type="checkbox" id="minibar" value="Minibar">
+                        <label for="minibar"><i class="fas fa-glass-whiskey"></i> Minibar</label>
+                    </div>
+                    <div class="amenity">
+                        <input type="checkbox" id="safe" value="Safe">
+                        <label for="safe"><i class="fas fa-lock"></i> Safe</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="room-description">Room Description</label>
+                <textarea id="room-description" rows="3" placeholder="Describe the room features, view, etc."></textarea>
+            </div>
+            
+            <button type="submit"><i class="fas fa-plus-circle"></i> Add New Room</button>
+        </form>
+        
+        <h3>All Rooms</h3>
+        <table id="room-table">
+            <thead><tr><th>Room No.</th><th>Type</th><th>Floor</th><th>Price/Night</th><th>Amenities</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+        </table>
+        
+        <div class="room-details" id="room-cards-container"></div>
+    </div>
+
+    <!-- Bookings -->
+    <div id="bookings" class="section">
+        <h2><i class="fas fa-calendar-check"></i> Booking & Reservations</h2>
+        <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" class="hero-img" alt="Hotel Booking Desk">
+        
+        <form id="add-booking-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="booking-room">Select Room *</label>
+                    <select id="booking-room" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="guest-name">Guest Full Name *</label>
+                    <input type="text" id="guest-name" placeholder="Guest Full Name" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="check-in">Check-in Date *</label>
+                    <input type="date" id="check-in" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-out Date *</label>
+                    <input type="date" id="check-out" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="guests-count">Number of Guests *</label>
+                    <select id="guests-count" required>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5+ Guests</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="booking-date">Booking Date *</label>
+                    <input type="date" id="booking-date" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="special-requests">Special Requests</label>
+                <textarea id="special-requests" rows="2" placeholder="Any special requests or preferences"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="parking-required">
+                    Requires Parking Space
+                </label>
+            </div>
+            
+            <button type="submit"><i class="fas fa-calendar-plus"></i> Confirm Reservation</button>
+        </form>
+        
+        <h3>All Bookings</h3>
+        <table id="booking-table">
+            <thead><tr><th>Booking ID</th><th>Room</th><th>Guest</th><th>Check-in</th><th>Check-out</th><th>Booking Date</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Guests -->
+    <div id="guests" class="section">
+        <h2><i class="fas fa-users"></i> Guest Database</h2>
+        
+        <form id="add-guest-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="guest-fullname">Full Name *</label>
+                    <input type="text" id="guest-fullname" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="guest-email">Email Address *</label>
+                    <input type="email" id="guest-email" placeholder="Email Address" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="guest-phone">Phone Number *</label>
+                    <input type="tel" id="guest-phone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="guest-nationality">Nationality</label>
+                    <input type="text" id="guest-nationality" placeholder="Nationality">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="guest-address">Address</label>
+                <textarea id="guest-address" rows="2" placeholder="Full Address"></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="guest-id-type">ID Type</label>
+                    <select id="guest-id-type">
+                        <option value="">Select ID Type</option>
+                        <option value="Passport">Passport</option>
+                        <option value="Driver License">Driver License</option>
+                        <option value="National ID">National ID</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guest-id-number">ID Number</label>
+                    <input type="text" id="guest-id-number" placeholder="ID Number">
+                </div>
+            </div>
+            
+            <button type="submit"><i class="fas fa-user-plus"></i> Register Guest</button>
+        </form>
+        
+        <h3>Guest Records</h3>
+        <table id="guest-table">
+            <thead><tr><th>Guest ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Nationality</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Parking -->
+    <div id="parking" class="section">
+        <h2><i class="fas fa-parking"></i> Car Parking Management</h2>
+        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" class="hero-img" alt="Hotel Parking Area">
+        
+        <div class="card">
+            <h3>Parking Area Information</h3>
+            <p>Our hotel features a secure, multi-level underground parking facility with:</p>
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li>Total capacity: 150 vehicles</li>
+                <li>24/7 security surveillance</li>
+                <li>Valet parking service available</li>
+                <li>EV charging stations (10 units)</li>
+                <li>Separate areas for cars, bikes, and buses</li>
+                <li>Covered parking to protect vehicles from weather</li>
+            </ul>
+            <p><strong>Parking Charges:</strong> Complimentary for hotel guests | ₹200/hour for visitors</p>
+        </div>
+        
+        <h3>Parking Slot Status</h3>
+        <div class="parking-grid" id="parking-grid">
+            <!-- Parking slots will be generated here -->
+        </div>
+        
+        <h3>Manage Parking</h3>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button onclick="addParkingSlot()" class="btn-success"><i class="fas fa-plus"></i> Add Parking Slot</button>
+            <button onclick="resetParking()" class="btn-danger"><i class="fas fa-redo"></i> Reset Parking</button>
+        </div>
+    </div>
+
+    <!-- Facilities -->
+    <div id="facilities" class="section">
+        <h2><i class="fas fa-swimming-pool"></i> Hotel Facilities & Amenities</h2>
+        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80" class="hero-img" alt="Hotel Swimming Pool">
+        
+        <div class="room-details">
+            <div class="room-card">
+                <img src="https://images.unsplash.com/photo-1596394516093-9baa8c6c6bf2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" class="room-img" alt="Lobby">
+                <div class="room-info">
+                    <h4>Grand Lobby</h4>
+                    <p>Spacious, elegantly designed lobby with luxurious seating, concierge services, and 24/7 reception.</p>
+                    <div class="amenities" style="margin-top: 10px;">
+                        <div class="amenity"><i class="fas fa-concierge-bell"></i> Concierge</div>
+                        <div class="amenity"><i class="fas fa-wifi"></i> Free WiFi</div>
+                        <div class="amenity"><i class="fas fa-coffee"></i> Welcome Drink</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="room-card">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" class="room-img" alt="Swimming Pool">
+                <div class="room-info">
+                    <h4>Infinity Pool</h4>
+                    <p>Rooftop infinity pool with panoramic city views, poolside bar, and comfortable sun loungers.</p>
+                    <div class="amenities" style="margin-top: 10px;">
+                        <div class="amenity"><i class="fas fa-swimmer"></i> Swimming</div>
+                        <div class="amenity"><i class="fas fa-cocktail"></i> Pool Bar</div>
+                        <div class="amenity"><i class="fas fa-umbrella-beach"></i> Sun Lounge</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="room-card">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" class="room-img" alt="Spa">
+                <div class="room-info">
+                    <h4>Luxury Spa & Wellness</h4>
+                    <p>Full-service spa offering massages, facials, sauna, steam room, and wellness treatments.</p>
+                    <div class="amenities" style="margin-top: 10px;">
+                        <div class="amenity"><i class="fas fa-spa"></i> Spa</div>
+                        <div class="amenity"><i class="fas fa-hot-tub"></i> Sauna</div>
+                        <div class="amenity"><i class="fas fa-heartbeat"></i> Wellness</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="room-card">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" class="room-img" alt="Gym">
+                <div class="room-info">
+                    <h4>Fitness Center</h4>
+                    <p>State-of-the-art gym with modern equipment, personal trainers, and yoga studio.</p>
+                    <div class="amenities" style="margin-top: 10px;">
+                        <div class="amenity"><i class="fas fa-dumbbell"></i> Gym</div>
+                        <div class="amenity"><i class="fas fa-running"></i> Cardio</div>
+                        <div class="amenity"><i class="fas fa-user-friends"></i> Trainer</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="room-card">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" class="room-img" alt="Restaurant">
+                <div class="room-info">
+                    <h4>Fine Dining Restaurants</h4>
+                    <p>Multiple restaurants offering international cuisines, rooftop bar, and 24/7 room service.</p>
+                    <div class="amenities" style="margin-top: 10px;">
+                        <div class="amenity"><i class="fas fa-utensils"></i> Fine Dining</div>
+                        <div class="amenity"><i class="fas fa-wine-glass-alt"></i> Bar</div>
+                        <div class="amenity"><i class="fas fa-clock"></i> 24/7 Service</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="room-card">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" class="room-img" alt="Conference Room">
+                <div class="room-info">
+                    <h4>Conference & Event Spaces</h4>
+                    <p>Modern conference rooms, banquet halls, and business center for meetings and events.</p>
+                    <div class="amenities" style="margin-top: 10px;">
+                        <div class="amenity"><i class="fas fa-briefcase"></i> Business</div>
+                        <div class="amenity"><i class="fas fa-chalkboard"></i> Conference</div>
+                        <div class="amenity"><i class="fas fa-projector"></i> AV Equipment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h4>Child Play Area</h4>
+            <p>Our dedicated children's play area features safe, engaging activities for kids aged 3-12, supervised by trained staff. Includes indoor games, play structures, and educational toys.</p>
+            <div class="amenities">
+                <div class="amenity"><i class="fas fa-child"></i> Supervised Play</div>
+                <div class="amenity"><i class="fas fa-gamepad"></i> Games & Toys</div>
+                <div class="amenity"><i class="fas fa-clock"></i> 10 AM - 8 PM</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h4>Study Room & Library</h4>
+            <p>Quiet, well-lit study room with high-speed internet, comfortable seating, and a collection of books, magazines, and newspapers for guests who need to work or study during their stay.</p>
+            <div class="amenities">
+                <div class="amenity"><i class="fas fa-book"></i> Library</div>
+                <div class="amenity"><i class="fas fa-laptop"></i> Workstations</div>
+                <div class="amenity"><i class="fas fa-wifi"></i> High-speed WiFi</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <div id="about" class="section">
+        <h2><i class="fas fa-info-circle"></i> About 5 Star Elite Hotel</h2>
+        <img src="https://images.unsplash.com/photo-1564501049418-3c27787d01e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" class="hero-img" alt="Modern White-Blue Reception">
+        
+        <div class="card">
+            <h3>Our Story</h3>
+            <p>5 Star Elite Hotel is a premier luxury destination offering world-class hospitality since 2015. Nestled in the heart of the city, we've redefined luxury accommodation with our commitment to excellence, attention to detail, and unparalleled guest experiences.</p>
+            
+            <h3 style="margin-top: 1.5rem;">Hotel Features</h3>
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li><strong>150 Elegantly Designed Rooms & Suites</strong> with panoramic city or ocean views</li>
+                <li><strong>Multiple Fine-Dining Restaurants</strong> offering international and local cuisines</li>
+                <li><strong>Rooftop Infinity Pool</strong> with breathtaking cityscape views</li>
+                <li><strong>Full-Service Luxury Spa & Wellness Center</strong> with expert therapists</li>
+                <li><strong>State-of-the-Art Fitness Center</strong> with personal training services</li>
+                <li><strong>Modern Conference Facilities</strong> for business meetings and events</li>
+                <li><strong>Child Play Area</strong> with supervised activities for young guests</li>
+                <li><strong>Study Room & Library</strong> for business travelers and students</li>
+                <li><strong>Multi-Level Secure Parking</strong> with 150+ slots and EV charging stations</li>
+                <li><strong>24/7 Concierge & Room Service</strong> for ultimate convenience</li>
+            </ul>
+            
+            <h3 style="margin-top: 1.5rem;">Our Philosophy</h3>
+            <p>"Excellence in every detail" – We are committed to providing unforgettable experiences with personalized service, modern amenities, and meticulous attention to every aspect of your stay. From the moment you arrive until your departure, our dedicated staff ensures your comfort and satisfaction.</p>
+            
+            <h3 style="margin-top: 1.5rem;">Location & Accessibility</h3>
+            <p>Prime city center location with easy access to international airports, major business districts, shopping centers, and tourist attractions. We offer complimentary shuttle services to key locations within the city.</p>
+            
+            <h3 style="margin-top: 1.5rem;">Contact Information</h3>
+            <div class="amenities" style="margin-top: 1rem;">
+                <div class="amenity"><i class="fas fa-phone"></i> +91 98765 43210</div>
+                <div class="amenity"><i class="fas fa-envelope"></i> info@5starelite.com</div>
+                <div class="amenity"><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, City Center</div>
+                <div class="amenity"><i class="fas fa-globe"></i> www.5starelitehotel.com</div>
+            </div>
+            
+            <h3 style="margin-top: 1.5rem;">Awards & Recognitions</h3>
+            <p>• Luxury Travel Guide Award 2023 • World's Best Business Hotel 2022 • Excellence in Hospitality Award 2021-2023 • Green Hotel Certification 2023</p>
+        </div>
+    </div>
+</div>
+
+<!-- Login Section -->
+<div id="login-section">
+    <div class="login-box">
+        <div class="login-logo">
+            <i class="fas fa-crown"></i>
+        </div>
+        <h2 style="color: var(--primary-blue); margin-bottom: 1.5rem;">5 Star Elite Hotel</h2>
+        <h3 style="color: var(--secondary-blue); margin-bottom: 2rem;">Admin Portal</h3>
+        <form id="login-form">
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit"><i class="fas fa-lock"></i> Secure Login</button>
+        </form>
+        <p style="color: #666; text-align: center; margin-top: 1.5rem; font-size: 0.9rem;">Default: admin / elite2026</p>
+        <p style="color: var(--danger); text-align: center; margin-top: 1rem;" id="login-alert"></p>
+    </div>
+</div>
+
+<script>
+    // Initialize data structures
+    let rooms = JSON.parse(localStorage.getItem('rooms')) || [];
+    let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    let guests = JSON.parse(localStorage.getItem('guests')) || [];
+    let parkingSlots = JSON.parse(localStorage.getItem('parkingSlots')) || [];
+    
+    // Generate initial data if empty
+    function initializeData() {
+        if (rooms.length === 0) {
+            rooms = [
+                { number: "101", type: "Deluxe Ocean View", price: 12000, floor: "1", amenities: ["WiFi", "Hot Water", "AC", "TV", "Double Bed"], status: "Available", description: "Beautiful ocean view room with balcony" },
+                { number: "102", type: "Executive Suite", price: 18000, floor: "1", amenities: ["WiFi", "Hot Water", "AC", "TV", "Double Bed", "Minibar"], status: "Booked", description: "Spacious suite with work desk and lounge area" },
+                { number: "201", type: "Junior Suite", price: 15000, floor: "2", amenities: ["WiFi", "Hot Water", "AC", "TV", "Single Bed"], status: "Available", description: "Comfortable suite perfect for solo travelers" },
+                { number: "301", type: "Presidential Suite", price: 35000, floor: "3", amenities: ["WiFi", "Hot Water", "AC", "TV", "Double Bed", "Minibar", "Safe"], status: "Available", description: "Luxurious suite with separate living area and jacuzzi" },
+                { number: "401", type: "Family Suite", price: 22000, floor: "4", amenities: ["WiFi", "Hot Water", "AC", "TV", "Double Bed", "Single Bed"], status: "Available", description: "Perfect for families with children" },
+                { number: "PH-01", type: "Royal Penthouse", price: 50000, floor: "Penthouse", amenities: ["WiFi", "Hot Water", "AC", "TV", "Double Bed", "Minibar", "Safe"], status: "Maintenance", description: "Ultimate luxury with private terrace and panoramic views" }
+            ];
+            localStorage.setItem('rooms', JSON.stringify(rooms));
+        }
+        
+        if (guests.length === 0) {
+            guests = [
+                { id: generateId(), name: "Rajesh Kumar", email: "rajesh@example.com", phone: "9876543210", address: "Mumbai, India", nationality: "Indian", idType: "Passport", idNumber: "A1234567" },
+                { id: generateId(), name: "Sarah Johnson", email: "sarah@example.com", phone: "8765432109", address: "New York, USA", nationality: "American", idType: "Passport", idNumber: "US987654" },
+                { id: generateId(), name: "Michael Chen", email: "michael@example.com", phone: "7654321098", address: "Shanghai, China", nationality: "Chinese", idType: "National ID", idNumber: "CN123456" }
+            ];
+            localStorage.setItem('guests', JSON.stringify(guests));
+        }
+        
+        if (bookings.length === 0) {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 2);
+            const nextWeek = new Date(today);
+            nextWeek.setDate(nextWeek.getDate() + 7);
+            
+            bookings = [
+                { id: generateId(), roomNumber: "102", guestName: "Rajesh Kumar", checkIn: formatDate(today), checkOut: formatDate(tomorrow), bookingDate: formatDate(new Date(today.setDate(today.getDate() - 3))), guests: 2, specialRequests: "Early check-in requested", parkingRequired: true, status: "Confirmed" },
+                { id: generateId(), roomNumber: "201", guestName: "Sarah Johnson", checkIn: formatDate(nextWeek), checkOut: formatDate(new Date(nextWeek.setDate(nextWeek.getDate() + 3))), bookingDate: formatDate(new Date()), guests: 1, specialRequests: "Vegetarian meal preference", parkingRequired: false, status: "Confirmed" }
+            ];
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+        }
+        
+        if (parkingSlots.length === 0) {
+            for (let i = 1; i <= 20; i++) {
+                parkingSlots.push({
+                    id: `P${i.toString().padStart(3, '0')}`,
+                    status: Math.random() > 0.7 ? "Occupied" : Math.random() > 0.8 ? "Reserved" : "Available",
+                    vehicleType: "Car",
+                    assignedTo: Math.random() > 0.7 ? "Room 102" : ""
+                });
+            }
+            localStorage.setItem('parkingSlots', JSON.stringify(parkingSlots));
+        }
+    }
+    
+    // Utility functions
+    function generateId() {
+        return 'ELITE' + Date.now().toString().substr(-6) + Math.floor(Math.random() * 1000);
+    }
+    
+    function formatDate(date) {
+        return date.toISOString().split('T')[0];
+    }
+    
+    function showNotification(message, type = "info") {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+    
+    // Login functionality
+    document.getElementById('login-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const u = document.getElementById('username').value.trim();
+        const p = document.getElementById('password').value;
+        
+        if (u === 'admin' && p === 'elite2026') {
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('nav').style.display = 'flex';
+            document.getElementById('main-content').style.display = 'block';
+            initializeData();
+            loadAllData();
+            showNotification('Login successful! Welcome back, Admin.', 'success');
+        } else {
+            document.getElementById('login-alert').textContent = 'Invalid username or password!';
+            showNotification('Login failed. Please check your credentials.', 'error');
+        }
+    });
+    
+    function logout() {
+        document.getElementById('login-section').style.display = 'flex';
+        document.getElementById('nav').style.display = 'none';
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('login-form').reset();
+        document.getElementById('login-alert').textContent = '';
+        showNotification('You have been logged out successfully.', 'info');
+    }
+    
+    function showSection(id) {
+        // Update active nav link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.classList.remove('nav-active');
+        });
+        event.target.classList.add('nav-active');
+        
+        // Show selected section
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        
+        // Refresh data for the section
+        if (id === 'dashboard') updateDashboard();
+        if (id === 'rooms') loadRooms();
+        if (id === 'bookings') loadBookings();
+        if (id === 'guests') loadGuests();
+        if (id === 'parking') loadParking();
+    }
+    
+    function loadAllData() {
+        updateDateTime();
+        loadRooms();
+        loadBookings();
+        loadGuests();
+        loadParking();
+        updateDashboard();
+        populateRoomDropdown();
+    }
+    
+    function updateDateTime() {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit', 
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        document.getElementById('current-date').textContent = `Current Date & Time: ${now.toLocaleDateString('en-IN', options)}`;
+        
+        // Set default dates for booking form
+        const today = formatDate(new Date());
+        const tomorrow = formatDate(new Date(new Date().setDate(new Date().getDate() + 1)));
+        document.getElementById('check-in').value = today;
+        document.getElementById('check-out').value = tomorrow;
+        document.getElementById('booking-date').value = today;
+    }
+    
+    setInterval(updateDateTime, 1000);
+    
+    // Room Management
+    document.getElementById('add-room-form').addEventListener('submit', e => {
+        e.preventDefault();
+        
+        // Get amenities
+        const amenities = [];
+        document.querySelectorAll('#add-room-form input[type="checkbox"]:checked').forEach(cb => {
+            amenities.push(cb.value);
+        });
+        
+        const newRoom = {
+            number: document.getElementById('room-number').value.trim(),
+            type: document.getElementById('room-type').value,
+            price: parseInt(document.getElementById('room-price').value),
+            floor: document.getElementById('room-floor').value,
+            amenities: amenities,
+            status: 'Available',
+            description: document.getElementById('room-description').value
+        };
+        
+        // Check if room already exists
+        if (rooms.some(room => room.number === newRoom.number)) {
+            showNotification(`Room ${newRoom.number} already exists!`, 'error');
+            return;
+        }
+        
+        rooms.push(newRoom);
+        saveData();
+        e.target.reset();
+        showNotification(`Room ${newRoom.number} added successfully!`, 'success');
+    });
+    
+    function loadRooms() {
+        const tbody = document.querySelector('#room-table tbody');
+        const cardsContainer = document.getElementById('room-cards-container');
+        
+        tbody.innerHTML = '';
+        cardsContainer.innerHTML = '';
+        
+        rooms.forEach((room, index) => {
+            // Table row
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${room.number}</strong></td>
+                <td>${room.type}</td>
+                <td>${room.floor}</td>
+                <td>₹${room.price.toLocaleString()}</td>
+                <td>${room.amenities.slice(0, 3).join(', ')}${room.amenities.length > 3 ? '...' : ''}</td>
+                <td><span class="status-${room.status.toLowerCase()}">${room.status}</span></td>
+                <td>
+                    <button onclick="deleteRoom(${index})" class="btn-danger" style="padding: 0.5rem; font-size: 0.9rem;"><i class="fas fa-trash"></i></button>
+                    <button onclick="toggleRoomStatus(${index})" class="btn-secondary" style="padding: 0.5rem; font-size: 0.9rem; margin-left: 0.5rem;">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            
+            // Room card
+            const card = document.createElement('div');
+            card.className = 'room-card';
+            card.innerHTML = `
+                <div class="room-info">
+                    <h4>${room.type} - Room ${room.number}</h4>
+                    <p><strong>Floor:</strong> ${room.floor} | <strong>Price:</strong> ₹${room.price.toLocaleString()}/night</p>
+                    <p><strong>Status:</strong> <span class="status-${room.status.toLowerCase()}">${room.status}</span></p>
+                    <p>${room.description || 'No description provided.'}</p>
+                    <div class="amenities" style="margin-top: 10px;">
+                        ${room.amenities.map(amenity => `<div class="amenity"><i class="fas fa-check"></i> ${amenity}</div>`).join('')}
+                    </div>
+                </div>
+            `;
+            cardsContainer.appendChild(card);
+        });
+    }
+    
+    function deleteRoom(index) {
+        if (confirm(`Are you sure you want to delete room ${rooms[index].number}?`)) {
+            rooms.splice(index, 1);
+            saveData();
+            showNotification('Room deleted successfully!', 'success');
+        }
+    }
+    
+    function toggleRoomStatus(index) {
+        const statuses = ['Available', 'Booked', 'Maintenance'];
+        const currentStatus = rooms[index].status;
+        const currentIndex = statuses.indexOf(currentStatus);
+        rooms[index].status = statuses[(currentIndex + 1) % statuses.length];
+        saveData();
+        showNotification(`Room ${rooms[index].number} status changed to ${rooms[index].status}`, 'info');
+    }
+    
+    // Booking Management
+    function populateRoomDropdown() {
+        const select = document.getElementById('booking-room');
+        select.innerHTML = '<option value="">Select Available Room</option>';
+        
+        rooms.filter(room => room.status === 'Available').forEach(room => {
+            const opt = document.createElement('option');
+            opt.value = room.number;
+            opt.textContent = `${room.number} - ${room.type} (₹${room.price.toLocaleString()}/night)`;
+            select.appendChild(opt);
+        });
+    }
+    
+    document.getElementById('add-booking-form').addEventListener('submit', e => {
+        e.preventDefault();
+        
+        const roomNumber = document.getElementById('booking-room').value;
+        const guestName = document.getElementById('guest-name').value.trim();
+        const checkIn = document.getElementById('check-in').value;
+        const checkOut = document.getElementById('check-out').value;
+        const bookingDate = document.getElementById('booking-date').value;
+        const guests = parseInt(document.getElementById('guests-count').value);
+        const specialRequests = document.getElementById('special-requests').value;
+        const parkingRequired = document.getElementById('parking-required').checked;
+        
+        if (new Date(checkOut) <= new Date(checkIn)) {
+            showNotification('Check-out date must be after check-in date!', 'error');
+            return;
+        }
+        
+        // Check if room is available for the selected dates
+        const conflictingBooking = bookings.find(booking => 
+            booking.roomNumber === roomNumber &&
+            ((new Date(checkIn) >= new Date(booking.checkIn) && new Date(checkIn) <= new Date(booking.checkOut)) ||
+            (new Date(checkOut) >= new Date(booking.checkIn) && new Date(checkOut) <= new Date(booking.checkOut)))
+        );
+        
+        if (conflictingBooking) {
+            showNotification(`Room ${roomNumber} is already booked for selected dates!`, 'error');
+            return;
+        }
+        
+        const newBooking = {
+            id: generateId(),
+            roomNumber: roomNumber,
+            guestName: guestName,
+            checkIn: checkIn,
+            checkOut: checkOut,
+            bookingDate: bookingDate,
+            guests: guests,
+            specialRequests: specialRequests,
+            parkingRequired: parkingRequired,
+            status: 'Confirmed'
+        };
+        
+        // Update room status
+        const roomIndex = rooms.findIndex(room => room.number === roomNumber);
+        if (roomIndex !== -1) {
+            rooms[roomIndex].status = 'Booked';
+        }
+        
+        // Assign parking if required
+        if (parkingRequired) {
+            const availableSlot = parkingSlots.find(slot => slot.status === 'Available');
+            if (availableSlot) {
+                availableSlot.status = 'Reserved';
+                availableSlot.assignedTo = `Room ${roomNumber}`;
+                newBooking.parkingSlot = availableSlot.id;
+            }
+        }
+        
+        bookings.push(newBooking);
+        saveData();
+        e.target.reset();
+        document.getElementById('check-in').value = formatDate(new Date());
+        document.getElementById('check-out').value = formatDate(new Date(new Date().setDate(new Date().getDate() + 1)));
+        document.getElementById('booking-date').value = formatDate(new Date());
+        
+        showNotification(`Booking confirmed for ${guestName} in room ${roomNumber}!`, 'success');
+    });
+    
+    function loadBookings() {
+        const tbody = document.querySelector('#booking-table tbody');
+        const recentTbody = document.querySelector('#recent-bookings tbody');
+        
+        tbody.innerHTML = '';
+        recentTbody.innerHTML = '';
+        
+        // Sort bookings by check-in date (most recent first)
+        const sortedBookings = [...bookings].sort((a, b) => new Date(b.checkIn) - new Date(a.checkIn));
+        
+        sortedBookings.forEach((booking, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${booking.id}</td>
+                <td>${booking.roomNumber}</td>
+                <td>${booking.guestName}</td>
+                <td>${booking.checkIn}</td>
+                <td>${booking.checkOut}</td>
+                <td>${booking.bookingDate}</td>
+                <td>
+                    <button onclick="cancelBooking(${index})" class="btn-danger" style="padding: 0.5rem; font-size: 0.9rem;"><i class="fas fa-times"></i> Cancel</button>
+                    <button onclick="editBooking(${index})" class="btn-secondary" style="padding: 0.5rem; font-size: 0.9rem; margin-left: 0.5rem;"><i class="fas fa-edit"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            
+            // Add to recent bookings (only first 5)
+            if (index < 5) {
+                const recentTr = document.createElement('tr');
+                const statusClass = booking.status === 'Confirmed' ? 'status-available' : 'status-booked';
+                recentTr.innerHTML = `
+                    <td>${booking.id.substr(-6)}</td>
+                    <td>${booking.guestName}</td>
+                    <td>${booking.roomNumber}</td>
+                    <td>${booking.checkIn}</td>
+                    <td>${booking.checkOut}</td>
+                    <td><span class="${statusClass}">${booking.status}</span></td>
+                `;
+                recentTbody.appendChild(recentTr);
+            }
+        });
+    }
+    
+    function cancelBooking(index) {
+        if (confirm(`Cancel booking ${bookings[index].id}?`)) {
+            // Free up the room
+            const roomIndex = rooms.findIndex(room => room.number === bookings[index].roomNumber);
+            if (roomIndex !== -1) {
+                rooms[roomIndex].status = 'Available';
+            }
+            
+            // Free up parking slot if assigned
+            if (bookings[index].parkingSlot) {
+                const parkingIndex = parkingSlots.findIndex(slot => slot.id === bookings[index].parkingSlot);
+                if (parkingIndex !== -1) {
+                    parkingSlots[parkingIndex].status = 'Available';
+                    parkingSlots[parkingIndex].assignedTo = '';
+                }
+            }
+            
+            bookings.splice(index, 1);
+            saveData();
+            showNotification('Booking cancelled successfully!', 'success');
+        }
+    }
+    
+    function editBooking(index) {
+        // In a real app, this would open a form to edit the booking
+        showNotification('Edit booking feature coming soon!', 'info');
+    }
+    
+    // Guest Management
+    document.getElementById('add-guest-form').addEventListener('submit', e => {
+        e.preventDefault();
+        
+        const newGuest = {
+            id: generateId(),
+            name: document.getElementById('guest-fullname').value.trim(),
+            email: document.getElementById('guest-email').value.trim(),
+            phone: document.getElementById('guest-phone').value.trim(),
+            address: document.getElementById('guest-address').value.trim(),
+            nationality: document.getElementById('guest-nationality').value.trim(),
+            idType: document.getElementById('guest-id-type').value,
+            idNumber: document.getElementById('guest-id-number').value.trim()
+        };
+        
+        guests.push(newGuest);
+        saveData();
+        e.target.reset();
+        showNotification(`Guest ${newGuest.name} registered successfully!`, 'success');
+    });
+    
+    function loadGuests() {
+        const tbody = document.querySelector('#guest-table tbody');
+        tbody.innerHTML = '';
+        
+        guests.forEach((guest, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${guest.id}</td>
+                <td>${guest.name}</td>
+                <td>${guest.email}</td>
+                <td>${guest.phone}</td>
+                <td>${guest.nationality || 'Not specified'}</td>
+                <td>
+                    <button onclick="deleteGuest(${index})" class="btn-danger" style="padding: 0.5rem; font-size: 0.9rem;"><i class="fas fa-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+    
+    function deleteGuest(index) {
+        if (confirm(`Delete guest ${guests[index].name}?`)) {
+            guests.splice(index, 1);
+            saveData();
+            showNotification('Guest deleted successfully!', 'success');
+        }
+    }
+    
+    // Parking Management
+    function loadParking() {
+        const parkingGrid = document.getElementById('parking-grid');
+        parkingGrid.innerHTML = '';
+        
+        parkingSlots.forEach((slot, index) => {
+            const slotElement = document.createElement('div');
+            slotElement.className = `parking-slot ${slot.status.toLowerCase()}`;
+            slotElement.innerHTML = `
+                <h4>${slot.id}</h4>
+                <p><strong>Status:</strong> ${slot.status}</p>
+                <p><strong>Type:</strong> ${slot.vehicleType}</p>
+                ${slot.assignedTo ? `<p><strong>Assigned to:</strong> ${slot.assignedTo}</p>` : ''}
+                <button onclick="toggleParkingStatus(${index})" class="btn-secondary" style="padding: 0.5rem; font-size: 0.9rem; width: 100%; margin-top: 0.5rem;">
+                    <i class="fas fa-sync-alt"></i> Change Status
+                </button>
+            `;
+            parkingGrid.appendChild(slotElement);
+        });
+        
+        // Update available parking count
+        const availableParking = parkingSlots.filter(slot => slot.status === 'Available').length;
+        document.getElementById('available-parking').textContent = availableParking;
+    }
+    
+    function addParkingSlot() {
+        const newId = `P${(parkingSlots.length + 1).toString().padStart(3, '0')}`;
+        parkingSlots.push({
+            id: newId,
+            status: 'Available',
+            vehicleType: 'Car',
+            assignedTo: ''
+        });
+        saveData();
+        showNotification(`Parking slot ${newId} added!`, 'success');
+    }
+    
+    function resetParking() {
+        if (confirm('Reset all parking slots to Available status?')) {
+            parkingSlots.forEach(slot => {
+                slot.status = 'Available';
+                slot.assignedTo = '';
+            });
+            saveData();
+            showNotification('All parking slots reset to Available!', 'success');
+        }
+    }
+    
+    function toggleParkingStatus(index) {
+        const statuses = ['Available', 'Occupied', 'Reserved', 'Maintenance'];
+        const currentIndex = statuses.indexOf(parkingSlots[index].status);
+        parkingSlots[index].status = statuses[(currentIndex + 1) % statuses.length];
+        
+        // Clear assignment if status is not Occupied or Reserved
+        if (!['Occupied', 'Reserved'].includes(parkingSlots[index].status)) {
+            parkingSlots[index].assignedTo = '';
+        }
+        
+        saveData();
+        showNotification(`Parking slot ${parkingSlots[index].id} status changed to ${parkingSlots[index].status}`, 'info');
+    }
+    
+    // Dashboard
+    function updateDashboard() {
+        document.getElementById('total-rooms').textContent = rooms.length;
+        document.getElementById('available-rooms').textContent = rooms.filter(room => room.status === 'Available').length;
+        document.getElementById('booked-rooms').textContent = rooms.filter(room => room.status === 'Booked').length;
+        document.getElementById('total-guests').textContent = guests.length;
+        
+        // Calculate today's check-ins
+        const today = formatDate(new Date());
+        const todayCheckins = bookings.filter(booking => booking.checkIn === today).length;
+        document.getElementById('today-checkin').textContent = todayCheckins;
+        
+        // Update available parking
+        const availableParking = parkingSlots.filter(slot => slot.status === 'Available').length;
+        document.getElementById('available-parking').textContent = availableParking;
+        
+        loadBookings(); // Refresh recent bookings
+    }
+    
+    // Save all data to localStorage
+    function saveData() {
+        localStorage.setItem('rooms', JSON.stringify(rooms));
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+        localStorage.setItem('guests', JSON.stringify(guests));
+        localStorage.setItem('parkingSlots', JSON.stringify(parkingSlots));
+        loadAllData();
+    }
+    
+    // Dark Mode Toggle
+    document.getElementById('darkModeToggle').addEventListener('change', function() {
+        if (this.checked) {
+            document.body.classList.add('dark-mode');
+            showNotification('Dark mode enabled', 'info');
+        } else {
+            document.body.classList.remove('dark-mode');
+            showNotification('Light mode enabled', 'info');
+        }
+    });
+    
+    // Initialize date on page load
+    updateDateTime();
+</script>
+</body>
+</html>
